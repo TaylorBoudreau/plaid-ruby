@@ -21,10 +21,6 @@ module Plaid
     # Public: The default Client.
     attr_accessor :client
 
-    # Public: The Integer read timeout for requests to Plaid HTTP API.
-    # Should be specified in seconds. Default value is 120 (2 minutes).
-    attr_accessor :read_timeout
-
     # Public: A helper function to ease configuration.
     #
     # Yields self.

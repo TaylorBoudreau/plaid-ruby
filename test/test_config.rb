@@ -24,6 +24,14 @@ class PlaidConfigTest < MiniTest::Test
     assert_equal 'https://www.example.com/', Plaid.client.env
   end
 
+  def test_read_timeout
+    Plaid.config do |p|
+      p.read_timeout = 300
+    end
+
+    assert_equal  300, Plaid.client.read_timeout
+  end
+
   def test_wrong_values_for_env
     assert_raises ArgumentError do
       Plaid.config do |p|

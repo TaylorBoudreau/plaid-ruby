@@ -12,6 +12,10 @@ module Plaid
     # E.g. 'https://tartan.plaid.com'.
     attr_reader :env
 
+    # Public: The Integer read timeout for requests to Plaid HTTP API.
+    # Should be specified in seconds. Default value is 120 (2 minutes).
+    attr_accessor :read_timeout
+
     # Public: Set Plaid environment to use.
     #
     # env - The Symbol (:tartan, :production), or a full String URL like
@@ -42,14 +46,16 @@ module Plaid
 
     # Public: Construct a Client instance.
     #
-    # env       - The Symbol (:tartan, :production), or a full String URL like
-    #             'https://tartan.plaid.com'.
-    # client_id - The String Plaid account client ID to authenticate requests.
-    # secret    - The String Plaid account secret to authenticate requests.
-    def initialize(env: nil, client_id: nil, secret: nil)
+    # env          - The Symbol (:tartan, :production), or a full String URL like
+    #                'https://tartan.plaid.com'.
+    # client_id    - The String Plaid account client ID to authenticate requests.
+    # secret       - The String Plaid account secret to authenticate requests.
+    # read_timeout - The Integer for requests to Plaid HTTP API.
+    def initialize(env: nil, client_id: nil, secret: nil, read_timeout: 120)
       env && self.env = env
       self.client_id = client_id
       self.secret = secret
+      self.read_timeout = read_timeout
     end
 
     # Public: Check if client_id is configured.

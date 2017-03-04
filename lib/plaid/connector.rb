@@ -7,9 +7,6 @@ module Plaid
   class Connector
     attr_reader :uri, :http, :request, :response, :body
 
-    # Internal: Default read timeout for HTTP calls.
-    DEFAULT_TIMEOUT = 120
-
     # Internal: Prepare to run request.
     #
     # path    - The String path without leading slash. E.g. 'connect'
@@ -31,7 +28,7 @@ module Plaid
       @http = Net::HTTP.new(@uri.host, @uri.port)
       @http.use_ssl = true
 
-      @http.read_timeout = Plaid.read_timeout || DEFAULT_TIMEOUT
+      @http.read_timeout = @client.read_timeout
     end
 
     # Internal: Run GET request.
